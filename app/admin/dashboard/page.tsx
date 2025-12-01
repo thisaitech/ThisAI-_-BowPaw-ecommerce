@@ -416,9 +416,11 @@ export default function AdminDashboard() {
                       <div>
                         <h4 className="font-medium text-gray-900 mb-2">Shipping Address</h4>
                         <p className="text-sm text-gray-600">
-                          {selectedOrder.shippingAddress.street}<br />
-                          {selectedOrder.shippingAddress.city}, {selectedOrder.shippingAddress.state}<br />
-                          {selectedOrder.shippingAddress.pincode}, {selectedOrder.shippingAddress.country}
+                          {selectedOrder.shippingAddress.addressLine1}<br />
+                          {selectedOrder.shippingAddress.addressLine2 && <>{selectedOrder.shippingAddress.addressLine2}<br /></>}
+                          {selectedOrder.shippingAddress.area}, {selectedOrder.shippingAddress.city}<br />
+                          {selectedOrder.shippingAddress.district}, {selectedOrder.shippingAddress.state} - {selectedOrder.shippingAddress.pincode}<br />
+                          {selectedOrder.shippingAddress.country}
                         </p>
                       </div>
 
@@ -579,7 +581,7 @@ export default function AdminDashboard() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
-                      <td className="px-6 py-4 text-sm text-gray-600">{user.phone || '-'}</td>
+                      <td className="px-6 py-4 text-sm text-gray-600">{user.mobile || '-'}</td>
                       <td className="px-6 py-4">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                           user.role === 'admin' ? 'bg-red-100 text-red-600' :

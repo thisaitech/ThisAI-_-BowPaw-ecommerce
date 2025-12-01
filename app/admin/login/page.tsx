@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export default function AdminLoginPage() {
   const router = useRouter()
-  const { login, isAuthenticated, currentUser } = useAuthStore()
+  const { loginWithPassword, isAuthenticated, currentUser } = useAuthStore()
   
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000))
 
-    const result = login(email, password)
+    const result = loginWithPassword(email, password)
     
     if (result.success) {
       const user = useAuthStore.getState().currentUser

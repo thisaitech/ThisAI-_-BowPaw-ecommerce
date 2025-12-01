@@ -30,27 +30,43 @@ export default function PetCard({ pet, index = 0 }: PetCardProps) {
   
   const isWishlisted = isInWishlist(pet.id)
 
+  // Create a Product-compatible object from PetBreed
+  const createProductFromPet = () => ({
+    id: pet.id,
+    name: pet.name,
+    slug: pet.id,
+    description: pet.description,
+    shortDescription: pet.description.slice(0, 100),
+    price: parseFloat(pet.price.replace('₹', '').replace(',', '')),
+    compareAtPrice: pet.originalPrice ? parseFloat(pet.originalPrice.replace('₹', '').replace(',', '')) : undefined,
+    category: pet.category,
+    tags: pet.features,
+    images: pet.gallery || [pet.image],
+    variants: [],
+    reviews: [],
+    rating: pet.rating,
+    reviewCount: pet.reviews,
+    stock: pet.inStock ? 10 : 0,
+    sku: `PET-${pet.id}`,
+    brand: 'BowPaw',
+    isFeatured: pet.badge === 'Popular',
+    isNewArrival: false,
+    isBestSeller: pet.badge === 'Best for India',
+    isOnSale: !!pet.originalPrice,
+    petType: pet.category === 'dogs' ? 'dog' : pet.category === 'cats' ? 'cat' : 'all' as const,
+    createdAt: new Date().toISOString(),
+  })
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    addItem({
-      id: pet.id,
-      name: pet.name,
-      price: parseFloat(pet.price.replace('₹', '').replace(',', '')),
-      image: pet.image,
-      quantity: 1,
-    })
+    addItem(createProductFromPet() as any, 1)
   }
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    toggleItem({
-      id: pet.id,
-      name: pet.name,
-      price: parseFloat(pet.price.replace('₹', '').replace(',', '')),
-      image: pet.image,
-    })
+    toggleItem(createProductFromPet() as any)
   }
 
   const discount = pet.originalPrice 
