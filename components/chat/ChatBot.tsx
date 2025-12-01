@@ -304,7 +304,8 @@ export default function ChatBot() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 ${isOpen ? 'hidden' : 'block'}`}
+        className={`fixed right-4 z-[45] ${isOpen ? 'hidden' : 'block'}`}
+        style={{ bottom: 'max(calc(5rem + env(safe-area-inset-bottom, 0px)), 6rem)' }}
       >
         <motion.div
           animate={{ 
@@ -359,7 +360,8 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed bottom-0 right-0 sm:bottom-6 sm:right-6 z-50 w-full sm:w-[380px] h-[100dvh] sm:h-[600px] sm:max-h-[80vh] bg-white sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            className="fixed inset-0 sm:inset-auto sm:bottom-6 sm:right-6 z-[55] w-full sm:w-[380px] h-[100dvh] sm:h-[600px] sm:max-h-[80vh] bg-white sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col"
+            style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
           >
             {/* Header */}
             <div className="bg-gradient-to-r from-pink-400 via-rose-400 to-pink-500 p-4 text-white flex items-center gap-3">

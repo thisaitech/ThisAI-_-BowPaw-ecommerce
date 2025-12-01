@@ -246,20 +246,23 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Back to Top Button */}
+      {/* Back to Top Button - Hidden on mobile since we have bottom nav */}
       <motion.button
         onClick={scrollToTop}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         whileHover={{ scale: 1.1, y: -5 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 
-                   rounded-full flex items-center justify-center shadow-lg z-40
+        className="hidden lg:flex fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-r from-primary-500 to-secondary-500 
+                   rounded-full items-center justify-center shadow-lg z-40
                    hover:shadow-primary-500/50 transition-shadow"
         aria-label="Back to top"
       >
         <ArrowUp className="w-6 h-6 text-white" />
       </motion.button>
+      
+      {/* Mobile bottom padding for nav bar */}
+      <div className="h-20 lg:hidden" />
     </footer>
   )
 }

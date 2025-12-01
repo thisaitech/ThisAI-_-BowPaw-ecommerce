@@ -1,10 +1,11 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 import { Poppins, Inter } from 'next/font/google'
 import './globals.css'
 import { ParallaxProviderWrapper } from '@/components/providers/ParallaxProvider'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import MobileBottomNav from '@/components/layout/MobileBottomNav'
 import CartSidebar from '@/components/cart/CartSidebar'
 import WishlistModal from '@/components/wishlist/WishlistModal'
 import QuickViewModal from '@/components/product/QuickViewModal'
@@ -29,15 +30,38 @@ const inter = Inter({
   display: 'swap',
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#1F2937' },
+  ],
+}
+
 export const metadata: Metadata = {
   title: 'BowPaw - Premium Pet Products | Love Your Pets More',
-  description: 'Discover premium pet supplies for dogs, cats, and more. Quality products your furry friends will love. Free shipping on orders over $50.',
-  keywords: 'pet supplies, dog food, cat food, pet toys, pet beds, pet accessories',
+  description: 'Discover premium pet supplies for dogs, cats, and more. Quality products your furry friends will love. Free shipping on orders over ₹4,000.',
+  keywords: 'pet supplies, dog food, cat food, pet toys, pet beds, pet accessories, Tamil Nadu, India',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'BowPaw',
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
   openGraph: {
     title: 'BowPaw - Premium Pet Products',
     description: 'Discover premium pet supplies for dogs, cats, and more.',
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_IN',
     siteName: 'BowPaw',
   },
 }
@@ -52,9 +76,9 @@ export default function RootLayout({
       <body className="font-body bg-light text-dark antialiased">
         <InitialLoader>
           <ParallaxProviderWrapper>
-            <div className="min-h-screen flex flex-col">
+            <div className="min-h-screen flex flex-col mobile-vh-fix">
               <Header />
-              <main className="flex-1">
+              <main className="flex-1 pb-20 lg:pb-0">
                 <PageTransition>
                   {children}
                 </PageTransition>
@@ -76,6 +100,9 @@ export default function RootLayout({
             
             {/* Chat Bot */}
             <ChatBot />
+            
+            {/* Mobile Bottom Navigation */}
+            <MobileBottomNav />
           </ParallaxProviderWrapper>
         </InitialLoader>
       </body>
