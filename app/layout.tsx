@@ -3,6 +3,7 @@ import { Suspense } from 'react'
 import { Poppins, Inter } from 'next/font/google'
 import './globals.css'
 import { ParallaxProviderWrapper } from '@/components/providers/ParallaxProvider'
+import ServiceWorkerRegistration from '@/components/providers/ServiceWorkerRegistration'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import MobileBottomNav from '@/components/layout/MobileBottomNav'
@@ -73,7 +74,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+      <head>
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#3B82F6" />
+      </head>
       <body className="font-body bg-light text-dark antialiased">
+        <ServiceWorkerRegistration />
         <InitialLoader>
           <ParallaxProviderWrapper>
             <div className="min-h-screen flex flex-col mobile-vh-fix">
