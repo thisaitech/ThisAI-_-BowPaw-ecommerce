@@ -44,26 +44,27 @@ export default function SearchDropdown() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="absolute top-full left-0 right-0 bg-white shadow-2xl border-t"
+      className="fixed sm:absolute inset-0 sm:inset-auto sm:top-full sm:left-0 sm:right-0 bg-white shadow-2xl sm:border-t z-50 overflow-y-auto"
+      style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
-      <div className="container-custom py-6">
+      <div className="container-custom py-4 sm:py-6">
         <form onSubmit={handleSearch} className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" />
+          <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 text-gray-400" />
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search for products..."
-            className="w-full pl-14 pr-14 py-4 text-lg border-2 border-gray-200 rounded-xl 
+            className="w-full pl-11 sm:pl-14 pr-12 sm:pr-14 py-3 sm:py-4 text-base sm:text-lg border-2 border-gray-200 rounded-xl 
                        focus:outline-none focus:border-primary-500 transition-colors"
           />
           <button
             type="button"
             onClick={closeSearch}
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full"
+            className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 p-1.5 hover:bg-gray-100 rounded-full active:scale-90"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </form>
 

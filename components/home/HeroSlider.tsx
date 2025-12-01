@@ -22,7 +22,7 @@ export default function HeroSlider() {
   const swiperRef = useRef<SwiperType | null>(null)
 
   return (
-    <section className="relative h-[60vh] md:h-[80vh] lg:h-[90vh] overflow-hidden">
+    <section className="relative h-[calc(100vh-120px)] min-h-[400px] sm:h-[60vh] md:h-[80vh] lg:h-[90vh] overflow-hidden">
       <Swiper
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
@@ -107,7 +107,7 @@ export default function HeroSlider() {
                       animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                       data-swiper-parallax="-200"
-                      className="font-heading font-bold text-4xl md:text-5xl lg:text-7xl text-white mb-6"
+                      className="font-heading font-bold text-2xl sm:text-3xl md:text-5xl lg:text-7xl text-white mb-4 sm:mb-6 leading-tight"
                     >
                       {slide.title}
                     </motion.h1>
@@ -118,7 +118,7 @@ export default function HeroSlider() {
                       animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 30 }}
                       transition={{ duration: 0.6, delay: 0.4 }}
                       data-swiper-parallax="-300"
-                      className="text-gray-300 text-lg md:text-xl mb-8 max-w-lg"
+                      className="text-gray-300 text-sm sm:text-base md:text-xl mb-6 sm:mb-8 max-w-lg line-clamp-3 sm:line-clamp-none"
                     >
                       {slide.description}
                     </motion.p>
@@ -130,26 +130,26 @@ export default function HeroSlider() {
                       transition={{ duration: 0.6, delay: 0.5 }}
                       data-swiper-parallax="-400"
                       className={cn(
-                        'flex flex-wrap gap-4',
-                        slide.textPosition === 'center' && 'justify-center',
-                        slide.textPosition === 'right' && 'justify-end'
+                        'flex flex-col sm:flex-row gap-3 sm:gap-4',
+                        slide.textPosition === 'center' && 'sm:justify-center',
+                        slide.textPosition === 'right' && 'sm:justify-end'
                       )}
                     >
-                      <Link href={slide.ctaLink}>
+                      <Link href={slide.ctaLink} className="w-full sm:w-auto">
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="btn-primary text-lg px-8 py-4"
+                          className="btn-primary w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
                         >
                           <span>{slide.ctaText}</span>
                         </motion.button>
                       </Link>
                       {slide.secondaryCtaText && (
-                        <Link href={slide.secondaryCtaLink || '#'}>
+                        <Link href={slide.secondaryCtaLink || '#'} className="w-full sm:w-auto">
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="btn-secondary text-lg px-8 py-4 border-white text-white 
+                            className="btn-secondary w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-white text-white 
                                        hover:bg-white hover:text-dark"
                           >
                             {slide.secondaryCtaText}
@@ -165,28 +165,28 @@ export default function HeroSlider() {
         ))}
       </Swiper>
 
-      {/* Custom Navigation */}
+      {/* Custom Navigation - Hidden on small mobile */}
       <button
         onClick={() => swiperRef.current?.slidePrev()}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14
-                   bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center
-                   text-white hover:bg-white hover:text-dark transition-all duration-300"
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14
+                   bg-white/20 backdrop-blur-sm rounded-full hidden sm:flex items-center justify-center
+                   text-white hover:bg-white hover:text-dark transition-all duration-300 active:scale-90"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
       <button
         onClick={() => swiperRef.current?.slideNext()}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14
-                   bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center
-                   text-white hover:bg-white hover:text-dark transition-all duration-300"
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14
+                   bg-white/20 backdrop-blur-sm rounded-full hidden sm:flex items-center justify-center
+                   text-white hover:bg-white hover:text-dark transition-all duration-300 active:scale-90"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-6 h-6" />
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
-      {/* Slide Counter */}
-      <div className="absolute bottom-8 right-8 z-10 hidden md:block">
+      {/* Slide Counter - Hidden on mobile */}
+      <div className="absolute bottom-20 sm:bottom-8 right-4 sm:right-8 z-10 hidden md:block">
         <div className="flex items-center gap-2 text-white/80 font-mono">
           <span className="text-2xl font-bold">{String(activeIndex + 1).padStart(2, '0')}</span>
           <span className="text-lg">/</span>
@@ -194,12 +194,12 @@ export default function HeroSlider() {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Hidden on mobile */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-20 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 hidden sm:block"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
@@ -216,6 +216,15 @@ export default function HeroSlider() {
           </div>
         </motion.div>
       </motion.div>
+      
+      {/* Mobile Swipe Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 sm:hidden">
+        <div className="flex items-center gap-2 text-white/70 text-xs">
+          <ChevronLeft className="w-4 h-4" />
+          <span>Swipe</span>
+          <ChevronRight className="w-4 h-4" />
+        </div>
+      </div>
     </section>
   )
 }

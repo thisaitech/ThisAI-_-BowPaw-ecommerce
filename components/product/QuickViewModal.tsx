@@ -88,18 +88,23 @@ export default function QuickViewModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: 'spring', damping: 25 }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 
-                       md:max-w-4xl md:w-full md:max-h-[85vh] bg-white rounded-2xl shadow-2xl z-50 
+            className="fixed inset-0 sm:inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 
+                       md:max-w-4xl md:w-full md:max-h-[85vh] bg-white sm:rounded-2xl shadow-2xl z-50 
                        flex flex-col overflow-hidden"
+            style={{ 
+              paddingTop: 'env(safe-area-inset-top, 0px)',
+              paddingBottom: 'env(safe-area-inset-bottom, 0px)' 
+            }}
           >
             {/* Close Button */}
             <button
               onClick={closeQuickView}
-              className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full 
-                         shadow-lg hover:bg-gray-100 transition-colors z-10"
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 p-2 bg-white/80 backdrop-blur-sm rounded-full 
+                         shadow-lg hover:bg-gray-100 transition-colors z-10 active:scale-90"
+              style={{ marginTop: 'env(safe-area-inset-top, 0px)' }}
               aria-label="Close"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             <div className="flex-1 overflow-y-auto">

@@ -68,20 +68,24 @@ export default function CartSidebar() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-2xl z-50 flex flex-col"
+            className="fixed right-0 top-0 bottom-0 w-full sm:max-w-md bg-white shadow-2xl z-50 flex flex-col"
+            style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b">
+            <div 
+              className="flex items-center justify-between p-4 border-b bg-white sticky top-0 z-10"
+              style={{ paddingTop: 'max(env(safe-area-inset-top, 0px), 1rem)' }}
+            >
               <div className="flex items-center gap-2">
-                <ShoppingBag className="w-6 h-6 text-primary-500" />
-                <h2 className="font-heading font-bold text-xl">Your Cart</h2>
-                <span className="bg-primary-100 text-primary-500 text-sm font-semibold px-2 py-0.5 rounded-full">
-                  {itemCount} {itemCount === 1 ? 'item' : 'items'}
+                <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 text-primary-500" />
+                <h2 className="font-heading font-bold text-lg sm:text-xl">Your Cart</h2>
+                <span className="bg-primary-100 text-primary-500 text-xs sm:text-sm font-semibold px-2 py-0.5 rounded-full">
+                  {itemCount}
                 </span>
               </div>
               <button
                 onClick={closeCart}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors active:scale-90"
                 aria-label="Close cart"
               >
                 <X className="w-6 h-6" />
