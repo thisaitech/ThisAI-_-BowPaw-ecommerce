@@ -32,6 +32,11 @@ yarn-error.log*
 # firebase
 .firebase/
 firebase-debug.log
+
+# APK Output
+apk-output/
+*.apk
+*.aab
 firebase-debug.*.log
 
 # typescript
